@@ -1,0 +1,30 @@
+{
+  "name": "vue-come-true",
+  "version": "1.0.0",
+  "description": "1. vue-come-true-First:[简单了解双向绑定原理](https://github.com/coderzzp/vue-come-true/tree/master/vue-come-true-First)<br> 2. vue-come-true-Second:[一起读vue前期源码](https://github.com/coderzzp/vue-come-true/tree/master/vue-come-true-Second)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --mode=development --config build/webpack.config.js",
+    "build": "webpack --mode=production --config build/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coderzzp/vue-come-true.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coderzzp/vue-come-true/issues"
+  },
+  "homepage": "https://github.com/coderzzp/vue-come-true#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
