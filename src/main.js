@@ -1,15 +1,16 @@
-import { initData } from './observer'
-import { node2Fragment } from './compile'
+import { observe } from "./core/observer/Observer";
+import { render } from "./core/observer/render";
+
 
 export default class Vue {
   constructor (option) {
     this.$option = option
-    if (option.data) {
-      initData(option.data, this)
+    if (this.$option.data) {
+      this.$observer = observe(this, this.$option.data)
     }
-    if (option.el) {
-      const dom = document.getElementById(option.el)
-      dom.append(node2Fragment(dom, this))
+    if (this.$option.el) {
+      const dom = document.getElementById(this.$option.el)
+      dom.appendChild(render(this, dom))
     }
   }
 }
