@@ -49,7 +49,7 @@ class Observer {
     walk(data) {
         let self = this;
         Object.keys(this.data).forEach(function (key) {
-            self.defineReactice(data, key, data[key]);
+            self.defineReactive(data, key, data[key]);
         });
     }
 
@@ -60,7 +60,7 @@ class Observer {
         }
     }
 
-    defineReactice(data, key, value) {
+    defineReactive(data, key, value) {
         // dep即我们之前提到的主题对象，它既可以添加观察者Watcher，又可以发布事件让所有Watcher更新视图，每个属性都有一个dep
         let dep = new Dep(),
             descriptor = Object.getOwnPropertyDescriptor(data, key);

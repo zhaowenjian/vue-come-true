@@ -6,7 +6,7 @@ export function def(obj, key, value, enumerable) {
         enumerable: !!enumerable
     });
 }
-
+// 防抖函数
 export function debounce(func, wait, immediate) {
   var timeout = null;
   

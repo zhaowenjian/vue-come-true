@@ -1,17 +1,29 @@
 import { observe } from "./core/observer/Observer";
-import { render } from "./core/observer/render";
+import Render from "./core/observer/Render";
 
 
 export default class Vue {
   constructor (option) {
     this.$option = option
-    if (this.$option.data) {
-      this.$observer = observe(this, this.$option.data)
-    }
-    if (this.$option.el) {
-      const dom = document.getElementById(this.$option.el)
-      dom.appendChild(render(this, dom))
-    }
+    this._data = this.$option.data
+    // 监听数据
+    Object.keys(this.$option.data).forEach(key => this._proxy(key))
+    this.$observer = observe(this.$option.data)
+    // 编译节点
+    this.$compiler = new Render(this.$option.el || document.body, this)
+  }
+  _proxy (key) {
+    const _this = this
+    Object.defineProperty(this, key, {
+      configurable: false,
+      enumerable: true,
+      get () {
+        return _this._data[key]
+      },
+      set (newVal) {
+        _this._data[key] = newVal
+      }
+    })
   }
 }
 

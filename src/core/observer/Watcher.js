@@ -1,21 +1,35 @@
 import Subject from "./Subject";
 
-
 export default class Watcher {
-  constructor (vm, node, name) {
+  constructor (vm, expression, callback) {
     Subject.target = this
-    this.$vm = vm
-    this.$node = node
-    this.$name = name
+    this.callback = callback
+    this.vm = vm
+    this.expression = expression
+    this.subjectIds = {}
     this.update()
     Subject.target = null
   }
+  addSubject (subject) {
+    if (!this.subjectIds.hasOwnProperty(subject.id)) {
+      this.subjectIds[subject.id] = subject
+      subject.addWatcher(this)
+    }
+  }
   update () {
     this.get()
-    this.$node.nodeType === 3 && (this.$node.nodeValue = this.value)
-    this.$node.nodeType === 1 && (this.$node.value = this.value)
+    if (this.value !== this.oldVal) {
+      this.callback.call(this.vm, this.value, this.oldVal)
+      this.oldVal = this.value
+    }
   }
   get () {
-    this.value = this.$vm[this.$name]
+    return this.value = this._getVMVal()
+  }
+  _getVMVal () {
+    let expression = this.expression.split('.')
+    let value = this.vm
+    expression.forEach(curVal => value = value[curVal])
+    return value
   }
 }
