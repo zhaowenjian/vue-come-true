@@ -44,6 +44,8 @@
       <p v-class="red">我是v-绑定了red的标签文字</p>
       <button v-on:click="changeclass">点击更换颜色</button>
     </p>
+    <button v-on:click="change">vue无法监听下标改变数组</button>
+    <button v-on:click="addItem('1111')">用push给数组增加长度</button>
   </div>
 </body>
 <script>

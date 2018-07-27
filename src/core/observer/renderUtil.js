@@ -1,6 +1,11 @@
 import Watcher from './Watcher'
 import Render from './Render';
 
+const PARAM_REG = /\((.+)\)/g
+const STRING_REG = /\'(.*)\'/g
+const VAR_REG = /\{\{\{(.*?)\}\}\}|\{\{(.*?)\}\}/g
+const HTML_REG = /\{\{\{(.*)\}\}\}/
+
 export const directiveUtil = {
   bind: function (node, vm, expression, directive) {
     // 获取指令对应的更新函数 
@@ -123,7 +128,7 @@ export const directiveUtil = {
           // vm 中变量
           params.push(vm[name])
         }
-        node.addEventListener(node, () => {
+        node.addEventListener(eventType[1], () => {
           fn.apply(vm, params)
         })
       }
