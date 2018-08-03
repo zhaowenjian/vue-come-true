@@ -3,10 +3,13 @@ const Webpack =  require('webpack')
 const HtmlWebpackPlugin =  require('html-webpack-plugin')
 
 module.exports = {
-  entry: path.resolve(__dirname, '../src/main.js'),
+  entry: {
+    js: path.resolve(__dirname, '../src/main.js'),
+    ts: path.resolve(__dirname, '../src/ts/main.ts')
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'vue.js'
+    filename: '[name].vue.js'
   },
   module: {
     rules: [{
@@ -18,12 +21,29 @@ module.exports = {
           presets: ['stage-2']
         }
       }
+    }, {
+      test: /\.tsx?$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'ts-loader',
+        options: {
+
+        }
+      }
     }]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-      inject: 'head'
+      filename: 'index.html',
+      inject: 'head',
+      chunks: ['js']
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/indexTs.html',
+      filename: 'indexTs.html',
+      inject: 'head',
+      chunks: ['ts']
     }),
     new Webpack.HotModuleReplacementPlugin()
   ],
