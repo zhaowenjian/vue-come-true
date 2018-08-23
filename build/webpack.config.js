@@ -5,11 +5,15 @@ const HtmlWebpackPlugin =  require('html-webpack-plugin')
 module.exports = {
   entry: {
     js: path.resolve(__dirname, '../src/main.js'),
+    indexTs: path.resolve(__dirname, '../src/index.ts'),
     ts: path.resolve(__dirname, '../src/ts/main.ts')
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].vue.js'
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.json']
   },
   module: {
     rules: [{
@@ -24,20 +28,15 @@ module.exports = {
     }, {
       test: /\.tsx?$/,
       exclude: /node_modules/,
-      use: {
-        loader: 'ts-loader',
-        options: {
-
-        }
-      }
+      loader: 'babel-loader!ts-loader',
     }]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       filename: 'index.html',
-      inject: 'head',
-      chunks: ['js']
+      inject: 'body',
+      chunks: ['js', 'indexTs']
     }),
     new HtmlWebpackPlugin({
       template: 'src/indexTs.html',
