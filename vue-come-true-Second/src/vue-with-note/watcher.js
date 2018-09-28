@@ -16,7 +16,6 @@ export default class Watcher {
     //更新本node的视图
     update () {
         let newValue = this.get();
-        let oldValue = this.oldValue;
         if (newValue !== this.oldValue) {
             // 更新备份，准备下次对比
             this.oldValue = newValue;

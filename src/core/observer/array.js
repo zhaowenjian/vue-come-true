@@ -10,7 +10,13 @@ const arrayProto = Array.prototype
 
 export const arrayMethods = Object._create(arrayProto);
 
-['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(method => {
+['push',
+ 'pop',
+ 'shift',
+ 'unshift',
+ 'splice',
+ 'sort',
+ 'reverse'].forEach(method => {
   const original = arrayProto[method]
   // 覆盖原始方法
   def(arrayMethods, method, function (...args) {

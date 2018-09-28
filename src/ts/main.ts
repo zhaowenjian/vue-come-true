@@ -1,6 +1,6 @@
 
 import { Observer, observe } from './Observer'
-import {Compiler} from './Compiler'
+import Compiler from './Compiler'
 
 export default class Vue {
   $option: any;

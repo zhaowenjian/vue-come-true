@@ -41,7 +41,7 @@
     </div> -->
   <div id="app">
     
-    <input type="text" v-model="formodel"> {{formodel}}
+    <input type="text" v-model="formodel"> {{formodel}} {{{forhtml}}}
     <p>
       <h3>v-for</h3>
       <ul>
@@ -56,6 +56,16 @@
     <button v-on:click="change">vue无法监听下标改变数组</button>
     <button v-on:click="addItem('1111')">用push给数组增加长度</button>
   </div>
+
+  <p id="p1"><b>Hello</b> World</p>
+    <script>
+        var oP1 =  document.getElementById("p1");
+        var oHello = oP1.firstChild.firstChild;
+        var oWorld = oP1.lastChild;
+        var oRange = document.createRange();
+        oRange.setStart(oHello, 2);
+        oRange.setEnd(oWorld, 3);
+    </script>
 </body>
 <script>
   window.vm = new Vue({

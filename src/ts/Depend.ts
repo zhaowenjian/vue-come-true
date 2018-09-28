@@ -1,25 +1,31 @@
+
 import Watcher from './Watcher'
 
-let uid = 0
-
+let id = 0
 export default class Depend  {
-  uid: Number;
-  deps: Array<Watcher>
+
+  id: Number;
+
   static target: Watcher;
+
+  deps: Array<Watcher>;
+
   constructor () {
-    this.uid = uid++
+    this.id = id++
     this.deps = []
   }
+
   depend () {
     Depend.target.addDep(this)
   }
+
   addWatcher (watcher: Watcher) {
     this.deps.push(watcher)
   }
-  notify (newVal: any, oldVal: any) {
+
+  notify () {
     this.deps.forEach(watcher => watcher.update())
   }
-  removeDep () {
 
-  }
 }
+

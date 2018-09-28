@@ -12,7 +12,6 @@ wind.onload = function () {
   const combin = node => color => [node, color]
 
   const tasks = lift(combin)(items, colors).map(com => partial(setColor, com))
-  console.log(tasks)
   const chunkedTasks = chunk(tasks, 4)
 
   const run = async function(pause) {
@@ -23,5 +22,4 @@ wind.onload = function () {
   }
 
   run(1000)
-  
 }
